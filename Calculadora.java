@@ -20,13 +20,13 @@ public class Calculadora {
         return calculaIndemnizacion(aniosTrabajados, salario, tipoDespido, salarioPendiente, pagasExtras, vacaciones);
     }
 
-    private static double calculaVacaciones(double salario, int numeroPagasExtras, int diasVacacionesUsados, int diasHastaFecha) {
+    public static double calculaVacaciones(double salario, int numeroPagasExtras, int diasVacacionesUsados, int diasHastaFecha) {
         double diasVacRestantes =(365/30 * diasHastaFecha) - diasVacacionesUsados;
         double vacaciones = diasVacRestantes*(salario *(12+ numeroPagasExtras) / 365);
         return vacaciones;
     }
 
-    private static double calculaIndemnizacion(float aniosTrabajados, double salario, String tipoDespido, double salarioPendiente, double pagasExtras, double vacaciones) {
+    public static double calculaIndemnizacion(float aniosTrabajados, double salario, String tipoDespido, double salarioPendiente, double pagasExtras, double vacaciones) {
         double indemnizacion = 0;
         if(tipoDespido.equals("improcedente")) {
             indemnizacion = (salario / 30) * 33 * aniosTrabajados;
@@ -36,7 +36,7 @@ public class Calculadora {
         return salarioPendiente + pagasExtras + indemnizacion + vacaciones;
     }
 
-    private static double calculaPagasExtra(double salario, int diasHastaFecha) {
+    public static double calculaPagasExtra(double salario, int diasHastaFecha) {
         double pagasExtras = salario / diasHastaFecha * DIA_30_DE_JUNIO;
         if (diasHastaFecha >DIA_30_DE_JUNIO) {
             pagasExtras=pagasExtras- salario;
@@ -44,7 +44,7 @@ public class Calculadora {
         return pagasExtras;
     }
 
-    private static int getDiasHastaFecha(int diaFin, int mesFin) {
+    public static int getDiasHastaFecha(int diaFin, int mesFin) {
         // diaFin/mesFin
         int[] diasPorMes = {31,28,31,30,31,30,31,31,30,31,30,31};
         int diasHastaFecha = 0;
