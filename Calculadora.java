@@ -15,10 +15,15 @@ public class Calculadora {
         // Cálculo de las pagas extras pendientes
         double pagasExtras = calculaPagasExtra(salario, diasHastaFecha);
         // Vacaciones
-        double diasVacRestantes =(365/30 * diasHastaFecha) - diasVacacionesUsados;
-        double vacaciones = diasVacRestantes*(salario*(12+numeroPagasExtras) / 365);
+        double vacaciones = calculaVacaciones(salario, numeroPagasExtras, diasVacacionesUsados, diasHastaFecha);
         // Indemnización
         return calculaIndemnizacion(aniosTrabajados, salario, tipoDespido, salarioPendiente, pagasExtras, vacaciones);
+    }
+
+    private static double calculaVacaciones(double salario, int numeroPagasExtras, int diasVacacionesUsados, int diasHastaFecha) {
+        double diasVacRestantes =(365/30 * diasHastaFecha) - diasVacacionesUsados;
+        double vacaciones = diasVacRestantes*(salario *(12+ numeroPagasExtras) / 365);
+        return vacaciones;
     }
 
     private static double calculaIndemnizacion(float aniosTrabajados, double salario, String tipoDespido, double salarioPendiente, double pagasExtras, double vacaciones) {
