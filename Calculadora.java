@@ -2,36 +2,36 @@ public class Calculadora {
 
     public static final int DIA_30_DE_JUNIO = 181;
 
-    public double calculaFiniquito(int dF, int mF, float aT,
-                                   double sal, int nPE,
-                                   int dVU,
-                                   String tD) {
+    public double calculaFiniquito(int diaFin, int mesFin, float aniosTrabajados,
+                                   double salario, int numeroPagasExtras,
+                                   int diasVacacionesUsados,
+                                   String tipoDespido) {
 
         // Calcular días desde 1 de enero hasta fecha Fin de contrato
         // diaFin/mesFin
         int[] diasPorMes = {31,28,31,30,31,30,31,31,30,31,30,31};
-        int dHF = 0;
-        for (int i = 1; i < mF; i++) {
-            dHF =dHF+ diasPorMes[i];
+        int diasHataFecha = 0;
+        for (int i = 1; i < mesFin; i++) {
+            diasHataFecha =diasHataFecha+ diasPorMes[i];
         }
-        dHF += dF;
+        diasHataFecha += diaFin;
         // Cálculo del salario del mes en curso
-        double salarioPendiente = (sal / 30) * dHF;
+        double salarioPendiente = (salario / 30) * diasHataFecha;
         // Salario días trabajados
         // Cálculo de las pagas extras pendientes
-        double pagasExtras = sal /dHF * DIA_30_DE_JUNIO;
-        if (dHF>DIA_30_DE_JUNIO) {
-            pagasExtras=pagasExtras-sal;
+        double pagasExtras = salario /diasHataFecha * DIA_30_DE_JUNIO;
+        if (diasHataFecha>DIA_30_DE_JUNIO) {
+            pagasExtras=pagasExtras-salario;
         }
         // Vacaciones
-        double diasVacRestantes =(365/30 * dHF) - dVU;
-        double vacaciones = diasVacRestantes*(sal*(12+nPE) / 365);
+        double diasVacRestantes =(365/30 * diasHataFecha) - diasVacacionesUsados;
+        double vacaciones = diasVacRestantes*(salario*(12+numeroPagasExtras) / 365);
         // Indemnización
         double indemnizacion = 0;
-        if(tD.equals("improcedente")) {
-            indemnizacion = (sal / 30) * 33 * aT;
-        } else if(tD.equals("procedente")) {
-            indemnizacion = (sal / 30) * 20 * aT;
+        if(tipoDespido.equals("improcedente")) {
+            indemnizacion = (salario / 30) * 33 * aniosTrabajados;
+        } else if(tipoDespido.equals("procedente")) {
+            indemnizacion = (salario / 30) * 20 * aniosTrabajados;
         }
         return salarioPendiente + pagasExtras + indemnizacion + vacaciones;
     }
