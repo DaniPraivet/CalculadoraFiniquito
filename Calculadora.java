@@ -11,12 +11,12 @@ public class Calculadora {
         // diaFin/mesFin
         int[] diasPorMes = {31,28,31,30,31,30,31,31,30,31,30,31};
         int dHF = 0;
-        for (int i = 1; i <= mF; i++) {
+        for (int i = 1; i < mF; i++) {
             dHF =dHF+ diasPorMes[i];
         }
-        dHF = dF;
+        dHF += dF;
         // Cálculo del salario del mes en curso
-        double salarioPendiente = (sal / 30) * dF;
+        double salarioPendiente = (sal / 30) * dHF;
         // Salario días trabajados
         // Cálculo de las pagas extras pendientes
         double pagasExtras = sal /dHF * DIA_30_DE_JUNIO;
