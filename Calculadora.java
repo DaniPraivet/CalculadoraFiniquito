@@ -13,10 +13,7 @@ public class Calculadora {
         double salarioPendiente = (salario / 30) * diasHastaFecha;
         // Salario días trabajados
         // Cálculo de las pagas extras pendientes
-        double pagasExtras = salario /diasHastaFecha * DIA_30_DE_JUNIO;
-        if (diasHastaFecha>DIA_30_DE_JUNIO) {
-            pagasExtras=pagasExtras-salario;
-        }
+        double pagasExtras = calculaPagasExtra(salario, diasHastaFecha);
         // Vacaciones
         double diasVacRestantes =(365/30 * diasHastaFecha) - diasVacacionesUsados;
         double vacaciones = diasVacRestantes*(salario*(12+numeroPagasExtras) / 365);
@@ -28,6 +25,14 @@ public class Calculadora {
             indemnizacion = (salario / 30) * 20 * aniosTrabajados;
         }
         return salarioPendiente + pagasExtras + indemnizacion + vacaciones;
+    }
+
+    private static double calculaPagasExtra(double salario, int diasHastaFecha) {
+        double pagasExtras = salario / diasHastaFecha * DIA_30_DE_JUNIO;
+        if (diasHastaFecha >DIA_30_DE_JUNIO) {
+            pagasExtras=pagasExtras- salario;
+        }
+        return pagasExtras;
     }
 
     private static int getDiasHastaFecha(int diaFin, int mesFin) {
