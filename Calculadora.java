@@ -18,6 +18,10 @@ public class Calculadora {
         double diasVacRestantes =(365/30 * diasHastaFecha) - diasVacacionesUsados;
         double vacaciones = diasVacRestantes*(salario*(12+numeroPagasExtras) / 365);
         // Indemnización
+        return calculaIndemnizacion(aniosTrabajados, salario, tipoDespido, salarioPendiente, pagasExtras, vacaciones);
+    }
+
+    private static double calculaIndemnizacion(float aniosTrabajados, double salario, String tipoDespido, double salarioPendiente, double pagasExtras, double vacaciones) {
         double indemnizacion = 0;
         if(tipoDespido.equals("improcedente")) {
             indemnizacion = (salario / 30) * 33 * aniosTrabajados;
