@@ -8,13 +8,7 @@ public class Calculadora {
                                    String tipoDespido) {
 
         // Calcular días desde 1 de enero hasta fecha Fin de contrato
-        // diaFin/mesFin
-        int[] diasPorMes = {31,28,31,30,31,30,31,31,30,31,30,31};
-        int diasHataFecha = 0;
-        for (int i = 1; i < mesFin; i++) {
-            diasHataFecha =diasHataFecha+ diasPorMes[i];
-        }
-        diasHataFecha += diaFin;
+        int diasHataFecha = getDiasHataFecha(diaFin, mesFin);
         // Cálculo del salario del mes en curso
         double salarioPendiente = (salario / 30) * diasHataFecha;
         // Salario días trabajados
@@ -34,5 +28,16 @@ public class Calculadora {
             indemnizacion = (salario / 30) * 20 * aniosTrabajados;
         }
         return salarioPendiente + pagasExtras + indemnizacion + vacaciones;
+    }
+
+    private static int getDiasHataFecha(int diaFin, int mesFin) {
+        // diaFin/mesFin
+        int[] diasPorMes = {31,28,31,30,31,30,31,31,30,31,30,31};
+        int diasHataFecha = 0;
+        for (int i = 1; i < mesFin; i++) {
+            diasHataFecha =diasHataFecha+ diasPorMes[i];
+        }
+        diasHataFecha += diaFin;
+        return diasHataFecha;
     }
 }
